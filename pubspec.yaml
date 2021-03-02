@@ -1,6 +1,6 @@
 name: dio_http_cache_extended
 description: http cache lib for Flutter dio, extended from original flutter_http_cache to add cached data datetime.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/omidh28/dio-http-cache-extended
 
 environment:
