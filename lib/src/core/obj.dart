@@ -13,17 +13,28 @@ class CacheObj {
   List<int> content;
   int statusCode;
   List<int> headers;
+  DateTime modifiedOn;
 
   CacheObj._(
-      this.key, this.subKey, this.content, this.statusCode, this.headers);
+    this.key,
+    this.subKey,
+    this.content,
+    this.statusCode,
+    this.headers,
+    this.modifiedOn,
+  );
 
-  factory CacheObj(String key, List<int> content,
-      {String subKey = "",
-      Duration maxAge,
-      Duration maxStale,
-      int statusCode = 200,
-      List<int> headers}) {
-    return CacheObj._(key, subKey, content, statusCode, headers)
+  factory CacheObj(
+    String key,
+    List<int> content, {
+    String subKey = "",
+    Duration maxAge,
+    Duration maxStale,
+    int statusCode = 200,
+    List<int> headers,
+    DateTime modifiedOn,
+  }) {
+    return CacheObj._(key, subKey, content, statusCode, headers, modifiedOn)
       ..maxAge = maxAge
       ..maxStale = maxStale;
   }

@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:dio_http_cache/src/core/config.dart';
-import 'package:dio_http_cache/src/core/obj.dart';
-import 'package:dio_http_cache/src/store/store_impl.dart';
+import 'package:dio_http_cache_extended/src/core/config.dart';
+import 'package:dio_http_cache_extended/src/core/obj.dart';
+import 'package:dio_http_cache_extended/src/store/store_impl.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 

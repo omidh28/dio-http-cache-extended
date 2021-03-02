@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:dio_http_cache/src/core/config.dart';
-import 'package:dio_http_cache/src/core/manager.dart';
-import 'package:dio_http_cache/src/core/obj.dart';
+import 'package:dio_http_cache_extended/src/core/config.dart';
+import 'package:dio_http_cache_extended/src/core/manager.dart';
+import 'package:dio_http_cache_extended/src/core/obj.dart';
 
 const DIO_CACHE_KEY_TRY_CACHE = "dio_cache_try_cache";
 const DIO_CACHE_KEY_MAX_AGE = "dio_cache_max_age";
@@ -13,6 +13,8 @@ const DIO_CACHE_KEY_PRIMARY_KEY = "dio_cache_primary_key";
 const DIO_CACHE_KEY_SUB_KEY = "dio_cache_sub_key";
 const DIO_CACHE_KEY_FORCE_REFRESH = "dio_cache_force_refresh";
 const DIO_CACHE_HEADER_KEY_DATA_SOURCE = "dio_cache_header_key_data_source";
+const DIO_CACHE_HEADER_MODIFIED_DATE_TIME =
+    "dio_cache_header_modified_date_time";
 
 typedef _ParseHeadCallback = void Function(
     Duration _maxAge, Duration _maxStale);
@@ -86,6 +88,8 @@ class DioCacheManager {
     }
     // add flag
     headers.add(DIO_CACHE_HEADER_KEY_DATA_SOURCE, "from_cache");
+    headers.add(
+        DIO_CACHE_HEADER_MODIFIED_DATE_TIME, obj.modifiedOn.toIso8601String());
     dynamic data = obj.content;
     if (options.responseType != ResponseType.bytes) {
       data = jsonDecode(utf8.decode(data));
@@ -125,12 +129,16 @@ class DioCacheManager {
     } else {
       data = utf8.encode(jsonEncode(response.data));
     }
-    var obj = CacheObj(_getPrimaryKeyFromOptions(options), data,
-        subKey: _getSubKeyFromOptions(options),
-        maxAge: maxAge,
-        maxStale: maxStale,
-        statusCode: response.statusCode,
-        headers: utf8.encode(jsonEncode(response.headers.map)));
+    var obj = CacheObj(
+      _getPrimaryKeyFromOptions(options),
+      data,
+      subKey: _getSubKeyFromOptions(options),
+      maxAge: maxAge,
+      maxStale: maxStale,
+      statusCode: response.statusCode,
+      headers: utf8.encode(jsonEncode(response.headers.map)),
+      modifiedOn: DateTime.now(),
+    );
     return _manager?.pushToCache(obj);
   }
 
