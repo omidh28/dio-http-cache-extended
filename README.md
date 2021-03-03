@@ -12,7 +12,7 @@ Inspired by [flutter_cache_manager](https://github.com/renefloor/flutter_cache_m
 
 ``` yaml
 dependencies:
-  dio_http_cache_extended: ^1.0.2+1 #latest version
+  dio_http_cache_extended: ^1.0.2+2 #latest version
 ```
 
 ### QuickStart
@@ -84,7 +84,7 @@ dependencies:
 
 2. **Use "CacheConfig" to config default params**
 
-   1. **baseUrl:** it’s optional; If you don't have set baseUrl in CacheConfig, when you call `deleteCache` , you need provide full path like `"https://www.google.com/search?q=hello"` , but not just `"search?q=hello"` .
+   1. **baseUrl:** it’s optional; If you dont have set baseUrl in CacheConfig, when you call `deleteCache` , you need provide full path like `"https://www.google.com/search?q=hello"` , but not just `"search?q=hello"` .
    2. **encrypt / decrypt:**  these two must be used together to encrypt the disk cache data, you can also zip data here.
    3. **defaultMaxAge:**  use `Duration(day:7)` as default.
    4. **defaultaMaxStale:** similar with DefaultMaxAge.
@@ -173,13 +173,13 @@ dependencies:
    }
    ```
 
-7. **How to know if the data come from Cache**
+7. **How to know when was the last time cache was modified**
 
    
 
 ``` dart
    if (null != response.headers.value(DIO_CACHE_HEADER_KEY_DATA_SOURCE)) {
-		final date = response.headers.value(DIO_CACHE_HEADER_MODIFIED_DATE_TIME) // Iso 8601 String in local timezone
+	  final date = response.headers.value(DIO_CACHE_HEADER_MODIFIED_DATE_TIME) // Iso 8601 String in local timezone
    } 
    ```
 
