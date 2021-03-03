@@ -88,8 +88,13 @@ class DioCacheManager {
     }
     // add flag
     headers.add(DIO_CACHE_HEADER_KEY_DATA_SOURCE, "from_cache");
-    headers.add(
-        DIO_CACHE_HEADER_MODIFIED_DATE_TIME, obj?.modifiedOn?.toIso8601String());
+    if (obj.modifiedOn != null) {
+      headers.add(
+        DIO_CACHE_HEADER_MODIFIED_DATE_TIME,
+        obj.modifiedOn.toIso8601String(),
+      );
+    }
+
     dynamic data = obj.content;
     if (options.responseType != ResponseType.bytes) {
       data = jsonDecode(utf8.decode(data));
