@@ -13,6 +13,7 @@ CacheObj _$CacheObjFromJson(Map json) {
     subKey: json['subKey'] as String,
     statusCode: json['statusCode'] as int,
     headers: (json['headers'] as List)?.map((e) => e as int)?.toList(),
+    modifiedOn: (json['modifiedOn'] as String) == null ? null : DateTime.parse(json['modifiedOn']),
   )
     ..maxAgeDate = json['max_age_date'] as int
     ..maxStaleDate = json['max_stale_date'] as int;
@@ -26,4 +27,5 @@ Map<String, dynamic> _$CacheObjToJson(CacheObj instance) => <String, dynamic>{
       'content': instance.content,
       'statusCode': instance.statusCode,
       'headers': instance.headers,
+      'modifiedOn': instance.modifiedOn,
     };

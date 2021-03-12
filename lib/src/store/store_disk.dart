@@ -17,6 +17,7 @@ class DiskCacheStore extends ICacheStore {
   final String _columnMaxAgeDate = "max_age_date";
   final String _columnMaxStaleDate = "max_stale_date";
   final String _columnContent = "content";
+  final String _columnModifiedOn = "modifiedOn";
   final String _columnStatusCode = "statusCode";
   final String _columnHeaders = "headers";
 
@@ -57,6 +58,7 @@ class DiskCacheStore extends ICacheStore {
       CREATE TABLE IF NOT EXISTS $_tableCacheObject ( 
         $_columnKey text, 
         $_columnSubKey text, 
+        $_columnModifiedOn text,
         $_columnMaxAgeDate integer,
         $_columnMaxStaleDate integer,
         $_columnContent BLOB,
@@ -129,11 +131,12 @@ class DiskCacheStore extends ICacheStore {
         {
           _columnKey: obj.key,
           _columnSubKey: obj.subKey ?? "",
+          _columnModifiedOn: obj.modifiedOn,
           _columnMaxAgeDate: obj.maxAgeDate ?? 0,
           _columnMaxStaleDate: obj.maxStaleDate ?? 0,
           _columnContent: content,
           _columnStatusCode: obj.statusCode,
-          _columnHeaders: headers
+          _columnHeaders: headers,
         },
         conflictAlgorithm: ConflictAlgorithm.replace);
     return true;

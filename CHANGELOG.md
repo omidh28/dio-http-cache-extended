@@ -1,3 +1,6 @@
+## [1.1.0] - 2021-02-12
+* Fix a bug where modifiedOn date were not saved in database cache
+
 ## [1.0.2+2] - 2021-02-03
 * Update readme
 

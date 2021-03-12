@@ -12,7 +12,7 @@ Inspired by [flutter_cache_manager](https://github.com/renefloor/flutter_cache_m
 
 ``` yaml
 dependencies:
-  dio_http_cache_extended: ^1.0.2+2 #latest version
+  dio_http_cache_extended: ^1.1.0 #latest version
 ```
 
 ### QuickStart
